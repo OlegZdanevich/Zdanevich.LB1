@@ -1,5 +1,6 @@
 #include <iostream>;
 #include <string.h>;
+#define _IGNORE_BLOCK
 using namespace std;
 
 short ThanslateFromHex(char);//переводит такие буквы в 16ричной системе в цифры в двоичной
@@ -26,6 +27,8 @@ char ToUpper(char);//перевод строчной буквы в заглавную
 
 int main()
 {
+	
+	
 	while (true)
 	{
 		cout.width(50);
@@ -61,18 +64,19 @@ int main()
 		cout << "-array after deleting" << endl;
 		system("pause");
 		system("cls");
-		cout << s;
 		cout << "Would you like to continue? " << endl;
 		cout << "Yes- y or Y " << endl;
 		cout << "No- other symbols" << endl;
 		cout << "Waiting for Enter: " << endl;
 		cin >> s;
-		system("cls");
+		system("cls"); 
+		a = NULL;
+		delete [] a;
 		if (s == 'y' || s == 'Y') continue;
 		break;
 
 	}
-
+	
 	return 0;
 }
 
@@ -125,7 +129,7 @@ void DeleteElementsWithSpecialSign(int *a, int &n, short k)
 
 	for (int *i = a; i < a+n; i++)
 	{
-		l = *i;
+		l = abs(*i);
 		while (l >= 1)// переводим число в шестнадцатиричное
 		{
 			q = l % 16;
@@ -146,21 +150,23 @@ void QuickSort(int *a, int n)
 	int *arr = CreatingArray(n);
 	TakeFirstSymboFromHex(a, arr, n);// заполняем вспомогательный массив значениями из первого символа шестнадцатиричного числа
 	QuickSort(arr,a, 0, n-1);// начинаем сортировку
+	arr = NULL;
+	delete [] arr;
 }
 
-void QuickSort(int *a,int*b, int left, int right) 
+void QuickSort(int *arr,int*b, int left, int right) 
 {
 	int i = left, j = right;
-	int pivot = a[(left + right) / 2];
+	int pivot = arr[(left + right) / 2];
 
 	
 	while (i <= j) {
-		while (a[i] > pivot)
+		while (arr[i] > pivot)
 			i++;
-		while (a[j]< pivot)
+		while (arr[j]< pivot)
 			j--;
 		if (i <= j) {
-			Swap(a[i], a[j]);//так как порядок 2 массивов одинков и втрой массив содержит элементы из первого то значит, для сохранения отражения между двумя массива нужно совершать одинаковый swap
+			Swap(arr[i], arr[j]);//так как порядок 2 массивов одинков и втрой массив содержит элементы из первого то значит, для сохранения отражения между двумя массива нужно совершать одинаковый swap
 			Swap(b[i], b[j]);// и тем самым мы и можем сортировать
 			i++;
 			j--;
@@ -168,9 +174,9 @@ void QuickSort(int *a,int*b, int left, int right)
 	}
 
 	if (left < j)
-		QuickSort(a,b, left, j);// рекусивный вызов
+		QuickSort(arr,b, left, j);// рекусивный вызов
 	if (i < right)
-		QuickSort(a,b, i, right);
+		QuickSort(arr,b, i, right);
 
 
 }
@@ -181,7 +187,7 @@ void TakeFirstSymboFromHex(int *a,int *b, int n)
 	
 	for (int i = 0; i < n; i++)
 	{
-		l = a[i];
+		l = abs(a[i]);
 		while (l>=1)
 		{
 			q = l % 16;
