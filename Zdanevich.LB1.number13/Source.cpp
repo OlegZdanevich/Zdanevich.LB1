@@ -3,25 +3,25 @@
 #define _IGNORE_BLOCK
 using namespace std;
 
-short ThanslateFromHex(char);//переводит такие буквы в 16ричной системе в цифры в двоичной
-int* CreatingArray(int );//создает массив
-void EnterHexSign(char& );//Ввод 16ричного символа
-void DeleteElementsWithSpecialSign(int *, int&, short);//удаляет элемент в котором содержиться специальный символ
-void QuickSort(int *, int );//быстрая сортировка
-void QuickSort(int *,int *, int , int );//быстрая сортировка
-void TakeFirstSymboFromHex(int *, int *, int );//нахождение первого символа в 16ричной системе
-void Swap(int &, int &);//перемена местами элементов
-void DeleteTheSameElements(int *, int &);//удаляет одинаковые элементы
-void ShiftArray(int *, int , int *);//сдвиг элементов
-void EnterDimention(int &); // Ввод длины массива
-void ChoiceFillingStyle(int *,int );// Выбор по какому типу будет проводиться заполнение массива
-void EnterArrayYourself(int *,int );//ввод массива пользователем
-void EnterArrayRandom(int *, int );// рандомное заполнение массива
-void DisplayArray(int *, int );// показ массива на консоле
-bool IsDataValid(int );// проверка корректности данных
-bool IsChoiceValid(int );//проверка корректности данных
-bool IsHexSymbolValid(char*);//проверка корректности данных
-char ToUpper(char);//перевод строчной буквы в заглавную
+short ThanslateFromHex(char);
+int* CreatingArray(int );
+void EnterHexSign(char& );
+void DeleteElementsWithSpecialSign(int *, int&, short);
+void QuickSort(int *, int );
+void QuickSort(int *,int *, int , int );
+void TakeFirstSymboFromHex(int *, int *, int );
+void Swap(int &, int &);
+void DeleteTheSameElements(int *, int &);
+void ShiftArray(int *, int , int *);
+void EnterDimention(int &); 
+void ChoiceFillingStyle(int *,int );
+void EnterArrayYourself(int *,int );
+void EnterArrayRandom(int *, int );
+void DisplayArray(int *, int );
+bool IsDataValid(int );
+bool IsChoiceValid(int );
+bool IsHexSymbolValid(char*);
+char ToUpper(char);
 
 
 
@@ -41,11 +41,11 @@ int main()
 		EnterDimention(n);
 		system("cls");
 		int *a = CreatingArray(n);
-		ChoiceFillingStyle(a,n);//ввод массива
+		ChoiceFillingStyle(a,n);
 		DisplayArray(a, n);
 		cout << "-array before sorting"<<endl;
-		DeleteTheSameElements(a,n);// удаляем повторяющиеся символы
-		QuickSort(a, n);// сама сортировка
+		DeleteTheSameElements(a,n);
+		QuickSort(a, n);
 		DisplayArray(a, n);
 		cout << "-array after sorting" << endl;
 		system("pause");
@@ -57,9 +57,9 @@ int main()
 		system("pause");
 		system("cls");
 		char s = { 0 };
-		EnterHexSign(s);// ввод 16ричного символа
+		EnterHexSign(s);
 		short k = ThanslateFromHex(s);
-		DeleteElementsWithSpecialSign(a, n, k);// удаление элемента с опрделенным символом
+		DeleteElementsWithSpecialSign(a, n, k);
 		DisplayArray(a, n);
 		cout << "-array after deleting" << endl;
 		system("pause");
@@ -115,7 +115,7 @@ void EnterHexSign(char& a)
 		cin >> a;
 		a = ToUpper(a);
 		char*s = &a;
-		if (IsHexSymbolValid(s)) break;//проверка корректности кода
+		if (IsHexSymbolValid(s)) break;
 		cout << "Error!"<<endl;
 		system("pause");
 		system("cls");
@@ -130,13 +130,13 @@ void DeleteElementsWithSpecialSign(int *a, int &n, short k)
 	for (int *i = a; i < a+n; i++)
 	{
 		l = abs(*i);
-		while (l >= 1)// переводим число в шестнадцатиричное
+		while (l >= 1)
 		{
 			q = l % 16;
 			l /= 16;
 			if (q == k)
 			{
-				ShiftArray(a, n, i);// сдвигаем элементы
+				ShiftArray(a, n, i);
 				i--;
 				n--;
 			}
@@ -148,8 +148,8 @@ void DeleteElementsWithSpecialSign(int *a, int &n, short k)
 void QuickSort(int *a, int n)
 {
 	int *arr = CreatingArray(n);
-	TakeFirstSymboFromHex(a, arr, n);// заполняем вспомогательный массив значениями из первого символа шестнадцатиричного числа
-	QuickSort(arr,a, 0, n-1);// начинаем сортировку
+	TakeFirstSymboFromHex(a, arr, n);
+	QuickSort(arr,a, 0, n-1);
 	arr = NULL;
 	delete [] arr;
 }
@@ -166,15 +166,15 @@ void QuickSort(int *arr,int*b, int left, int right)
 		while (arr[j]< pivot)
 			j--;
 		if (i <= j) {
-			Swap(arr[i], arr[j]);//так как порядок 2 массивов одинков и втрой массив содержит элементы из первого то значит, для сохранения отражения между двумя массива нужно совершать одинаковый swap
-			Swap(b[i], b[j]);// и тем самым мы и можем сортировать
+			Swap(arr[i], arr[j]);
+			Swap(b[i], b[j]);
 			i++;
 			j--;
 		}
 	}
 
 	if (left < j)
-		QuickSort(arr,b, left, j);// рекусивный вызов
+		QuickSort(arr,b, left, j);
 	if (i < right)
 		QuickSort(arr,b, i, right);
 
@@ -208,14 +208,14 @@ void Swap(int &x, int &y)
 void DeleteTheSameElements(int *a, int &n)
 {
 	int *i, *j;
-	for ( i = a; i < a+n; i++) // Проверка элементов, перебор строк массива 
+	for ( i = a; i < a+n; i++) 
 	{
-		for (j = i + 1; j < a+n; j++) // Перебор элементов строк 
+		for (j = i + 1; j < a+n; j++) 
 		{
-			if (*i == *j) //  Нашли повтор 
+			if (*i == *j) 
 			{
 				ShiftArray(a, n, j);
-				n = n--; // "Укорачиваем" массив 
+				n = n--; 
 				*j = *j--;
 			}
 		}
@@ -226,7 +226,7 @@ void ShiftArray(int *a, int n, int *j)
 {
 	for (int* k = j; k <= a+n; k++)
 	{
-		*k = *(k+1); // Сдвигаем все следующие элементы на 1 справа-налево 
+		*k = *(k+1); 
 	}
 }
 
@@ -256,8 +256,8 @@ void ChoiceFillingStyle(int *a,int n)
 		cout << "Error!" << endl;
 	}
 	system("cls");
-	if (k == 1) EnterArrayYourself(a,n);// вводим масив самостоятельно
-	else EnterArrayRandom(a, n);// рандомный ввод
+	if (k == 1) EnterArrayYourself(a,n);
+	else EnterArrayRandom(a, n);
 }
 
 void EnterArrayYourself(int *a, int n)
@@ -304,7 +304,7 @@ bool IsHexSymbolValid(char *a)
 {
 	char *test = "ABCDEF";
 	char *q = strpbrk(a,test);
-	if (q != NULL) return true;// в случае если есть совпадение вернеться не указатель типа Null
+	if (q != NULL) return true;
 	return false;
 }
 
